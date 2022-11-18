@@ -21,6 +21,7 @@ mongoose.connect(url,connectionParams)
 const PORT = process.env.PORT || 5000;
 
 const authentication = require('./src/routes/authentication');
+const businesses = require('./src/routes/Businesses')
 
 app.use(express.json())
 
@@ -29,6 +30,6 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api', authentication)
-
+app.use('/api/business', businesses)
 
 app.listen(PORT, () => console.log(`App is running at port ${PORT}`))

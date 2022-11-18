@@ -2,8 +2,10 @@ const bcrypt = require('bcrypt')
 const User = require('../models/User');
 
 const login = async (req, res) => {
+    console.log(req.body.email)
     try {
         const user = await User.findOne({email: req.body.email});
+        console.log(user);
         if(user) {
             let isCorrectPassword = bcrypt.compareSync(req.body.password, user.password)
 
@@ -43,7 +45,6 @@ const register = async (req, res) => {
         res.json({msg: 'Server Error!! Something went wrong!'})
     }
 }
-
 
 
 module.exports = {login, register}
