@@ -30,16 +30,21 @@ router.get('/map', async (req,res) => {
     return res.status(200).json({data})
 })
 
-router.get('/reviews', (req, res) => {
+router.get('/reviews/:id', async (req, res) => {
+    console.log("Post hoga edr se data appna")
+    let reviews = await Review.find({'businessId': req.params.id})
 
+    res.status(200).json({reviews})
 })
 router.post('/reviews', async (req, res) => {
     try {
         let businessId = req.body.businessId
         let content = req.body.content
+        let username = req.body.username
         const newReview = new Review({
             businessId,
-            content
+            content,
+            username
         })
         newReview.save()
         return res.status(201).json({review: newReview})
